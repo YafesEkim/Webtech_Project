@@ -8,11 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HelloWorldController {
 
-/*    @GetMapping(path = "/")
+/*  @GetMapping(path = "/")
     public String showHelloWorldPage(Model model){
         model.addAttribute("helloName","Hello Yafes");
         return "HelloWorld"; //html Datei Name als Return --> falls in einem weiteren Ordner --> "Ordnername/Filename"
-    }*/
+    } */
 
     @GetMapping(path = "/")
     public ModelAndView showHelloWorld() {
