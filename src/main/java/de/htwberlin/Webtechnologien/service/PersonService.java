@@ -3,7 +3,7 @@ package de.htwberlin.Webtechnologien.service;
 import de.htwberlin.Webtechnologien.persistence.PersonEntity;
 import de.htwberlin.Webtechnologien.persistence.PersonRepository;
 import de.htwberlin.Webtechnologien.web.api.Person;
-import de.htwberlin.Webtechnologien.web.api.PersonCreateRequest;
+import de.htwberlin.Webtechnologien.web.api.PersonManipulationRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,9 +30,25 @@ public class PersonService {
         return personEntity.isPresent()? transformEntity(personEntity.get()) : null;
     }
 
-    public Person create(PersonCreateRequest request){
+    public Person create(PersonManipulationRequest request){
         var personEntity = new PersonEntity(request.getFirstName(),request.getLastName(),request.isMember());
         personEntity = personRepository.save(personEntity);
+        return transformEntity(personEntity);
+    }
+
+    public Person update (Long id, PersonManipulationRequest request){
+        var personEntityOptional = personRepository.findById(id);
+        if(personEntityOptional.isEmpty()){
+            return null;
+        }
+
+        var personEntity = personEntityOptional.get();
+        personEntity.setFirstName(request.getFirstName());
+        personEntity.setLastName(request.getLastName());
+        personEntity.setMember(request.isMember());
+
+        personEntity = personRepository.save(personEntity);
+
         return transformEntity(personEntity);
     }
 

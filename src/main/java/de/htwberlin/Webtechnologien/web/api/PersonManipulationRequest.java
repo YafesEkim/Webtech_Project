@@ -1,12 +1,12 @@
 package de.htwberlin.Webtechnologien.web.api;
 
-public class PersonCreateRequest {
+public class PersonManipulationRequest {
 
     private String firstName;
     private String lastName;
     private boolean member;
 
-    public PersonCreateRequest(String firstName, String lastName, boolean member) {
+    public PersonManipulationRequest(String firstName, String lastName, boolean member) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.member = member;
