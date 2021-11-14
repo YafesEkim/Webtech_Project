@@ -1,17 +1,17 @@
-package de.htwberlin.Webtechnologien.api;
+package de.htwberlin.Webtechnologien.web.api;
 
 public class Person {
 
     private long id;
     private String firstName;
     private String lastName;
-    private boolean vaccinated;
+    private boolean member;
 
-    public Person(long id, String firstName, String lastName, boolean vaccinated) {
+    public Person(long id, String firstName, String lastName, boolean member) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.vaccinated = vaccinated;
+        this.member = member;
     }
 
     public long getId() {
@@ -38,12 +38,12 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public boolean isVaccinated() {
-        return vaccinated;
+    public boolean isMember() {
+        return member;
     }
 
-    public void setVaccinated(boolean vaccinated) {
-        this.vaccinated = vaccinated;
+    public void setMember(boolean member) {
+        this.member = member;
     }
 
 
