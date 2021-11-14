@@ -1,15 +1,13 @@
 package de.htwberlin.Webtechnologien.web;
 
-import de.htwberlin.Webtechnologien.persistence.PersonRepository;
 import de.htwberlin.Webtechnologien.service.PersonService;
 import de.htwberlin.Webtechnologien.web.api.Person;
-import de.htwberlin.Webtechnologien.web.api.PersonCreateRequest;
+import de.htwberlin.Webtechnologien.web.api.PersonManipulationRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,10 +31,16 @@ public class PersonRestController {
     }
 
     @PostMapping(path = "/api/v1/persons")
-    public ResponseEntity<Void> createPerson(@RequestBody PersonCreateRequest request) throws URISyntaxException {
+    public ResponseEntity<Void> createPerson(@RequestBody PersonManipulationRequest request) throws URISyntaxException {
         var person = personService.create(request);
         URI uri = new URI("/api/v1/persons/" + person.getId());
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(path = "/api/v1/persons/{id}")
+    public ResponseEntity<Person> updatePerson(@PathVariable Long id, @RequestBody PersonManipulationRequest request){
+        var person = personService.update(id, request);
+        return person != null? ResponseEntity.ok(person) : ResponseEntity.notFound().build();
     }
 
 }
