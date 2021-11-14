@@ -14,26 +14,30 @@ public class PersonService {
 
     private final PersonRepository personRepository;
 
-    public PersonService(PersonRepository personRepository) {
+    public PersonService (PersonRepository personRepository){
         this.personRepository = personRepository;
     }
 
-    public List<Person> findAll() {
+    public List<Person> findAll(){
         List<PersonEntity> persons = personRepository.findAll();
-        return persons.stream().
-                map(this::tranformEntity)
+        return persons.stream()
+                .map(this::transformEntity)
                 .collect(Collectors.toList());
     }
 
-    public Person create(PersonCreateRequest request) {
-        var personEntitiy = new PersonEntity(request.getFirstName(), request.getLastName(), request.isMember());
-        personEntitiy = personRepository.save(personEntitiy);
-        return tranformEntity(personEntitiy);
+    public Person findById(Long id){
+        var personEntity = personRepository.findById(id);
+        return personEntity.isPresent()? transformEntity(personEntity.get()) : null;
     }
 
-    private Person tranformEntity(PersonEntity personEntity) {
+    public Person create(PersonCreateRequest request){
+        var personEntity = new PersonEntity(request.getFirstName(),request.getLastName(),request.isMember());
+        personEntity = personRepository.save(personEntity);
+        return transformEntity(personEntity);
+    }
 
-        return new Person(
+    private Person transformEntity(PersonEntity personEntity){
+       return new Person(
                 personEntity.getId(),
                 personEntity.getFirstName(),
                 personEntity.getLastName(),
