@@ -40,7 +40,7 @@ public class PersonEntity {
         return lastName;
     }
 
-    public boolean isMember() {
+    public boolean getMember() {
         return member;
     }
 
