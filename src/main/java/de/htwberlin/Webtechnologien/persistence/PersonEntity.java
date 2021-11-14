@@ -19,8 +19,7 @@ public class PersonEntity {
     @Column(name = "is_member")
     private boolean member;
 
-    public PersonEntity(long id, String firstName, String lastName, boolean member) {
-        this.id = id;
+    public PersonEntity( String firstName, String lastName, boolean member) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.member = member;

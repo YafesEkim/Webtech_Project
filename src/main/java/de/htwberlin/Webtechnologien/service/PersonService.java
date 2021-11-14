@@ -3,6 +3,7 @@ package de.htwberlin.Webtechnologien.service;
 import de.htwberlin.Webtechnologien.persistence.PersonEntity;
 import de.htwberlin.Webtechnologien.persistence.PersonRepository;
 import de.htwberlin.Webtechnologien.web.api.Person;
+import de.htwberlin.Webtechnologien.web.api.PersonCreateRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,19 +14,30 @@ public class PersonService {
 
     private final PersonRepository personRepository;
 
-    public PersonService (PersonRepository personRepository){
+    public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
 
-    public List<Person> findAll(){
+    public List<Person> findAll() {
         List<PersonEntity> persons = personRepository.findAll();
         return persons.stream().
-                map(personEntity -> new Person(
-                        personEntity.getId(),
-                        personEntity.getFirstName(),
-                        personEntity.getLastName(),
-                        personEntity.getMember()
-                ))
+                map(this::tranformEntity)
                 .collect(Collectors.toList());
+    }
+
+    public Person create(PersonCreateRequest request) {
+        var personEntitiy = new PersonEntity(request.getFirstName(), request.getLastName(), request.isMember());
+        personEntitiy = personRepository.save(personEntitiy);
+        return tranformEntity(personEntitiy);
+    }
+
+    private Person tranformEntity(PersonEntity personEntity) {
+
+        return new Person(
+                personEntity.getId(),
+                personEntity.getFirstName(),
+                personEntity.getLastName(),
+                personEntity.getMember()
+        );
     }
 }
