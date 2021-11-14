@@ -6,12 +6,6 @@ public class PersonCreateRequest {
     private String lastName;
     private boolean member;
 
-    public PersonCreateRequest(String firstName, String lastName, boolean member) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.member = member;
-
-    }
     public String getFirstName() {
         return firstName;
     }
@@ -36,5 +30,10 @@ public class PersonCreateRequest {
         this.member = member;
     }
 
+    public PersonCreateRequest(String firstName, String lastName, boolean member) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.member = member;
 
+    }
 }

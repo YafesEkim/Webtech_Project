@@ -5,10 +5,7 @@ import de.htwberlin.Webtechnologien.service.PersonService;
 import de.htwberlin.Webtechnologien.web.api.Person;
 import de.htwberlin.Webtechnologien.web.api.PersonCreateRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -25,15 +22,21 @@ public class PersonRestController {
     }
 
     @GetMapping(path = "/api/v1/persons")
-   // @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<List<Person>> fetchPerson() {
+    public ResponseEntity<List<Person>> fetchPersons() {
         return ResponseEntity.ok(personService.findAll());
+    }
+
+    @GetMapping(path = "/api/v1/persons/{id}")
+    public ResponseEntity<Person> fetchPersonById(@PathVariable Long id){
+        var person = personService.findById(id);
+        return person != null? ResponseEntity.ok(person) : ResponseEntity.notFound().build();
     }
 
     @PostMapping(path = "/api/v1/persons")
     public ResponseEntity<Void> createPerson(@RequestBody PersonCreateRequest request) throws URISyntaxException {
         var person = personService.create(request);
-        URI uri = new URI("/api/v1/persons/" + person.getId()); // adresse der neu erzeugten Ressourcen in der datenbank
+        URI uri = new URI("/api/v1/persons/" + person.getId());
         return ResponseEntity.created(uri).build();
     }
+
 }

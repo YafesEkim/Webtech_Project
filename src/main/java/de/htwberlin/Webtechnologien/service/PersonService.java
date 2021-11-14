@@ -21,17 +21,18 @@ public class PersonService {
     public List<Person> findAll() {
         List<PersonEntity> persons = personRepository.findAll();
         return persons.stream().
-                map(this::transformEntity)
+                map(this::tranformEntity)
                 .collect(Collectors.toList());
     }
 
     public Person create(PersonCreateRequest request) {
         var personEntitiy = new PersonEntity(request.getFirstName(), request.getLastName(), request.isMember());
         personEntitiy = personRepository.save(personEntitiy);
-        return transformEntity(personEntitiy);
+        return tranformEntity(personEntitiy);
     }
 
-    private Person transformEntity(PersonEntity personEntity) {
+    private Person tranformEntity(PersonEntity personEntity) {
+
         return new Person(
                 personEntity.getId(),
                 personEntity.getFirstName(),
