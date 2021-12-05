@@ -1,14 +1,14 @@
 package de.htwberlin.Webtechnologien.web.api;
 
-public class PetManipulationRequest {
+public class RechnungManipulationRequest {
 
     private String name;
-    private String gender;
+    private String rechnungsart;
     private Long ownerId;
 
-    public PetManipulationRequest(String name, String gender, Long ownerId) {
+    public RechnungManipulationRequest(String name, String rechnungsart, Long ownerId) {
         this.name = name;
-        this.gender = gender;
+        this.rechnungsart = rechnungsart;
         this.ownerId = ownerId;
     }
 
@@ -20,12 +20,12 @@ public class PetManipulationRequest {
         this.name = name;
     }
 
-    public String getGender() {
-        return gender;
+    public String getRechnungsart() {
+        return rechnungsart;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setRechnungsart(String rechnungsart) {
+        this.rechnungsart = rechnungsart;
     }
 
     public Long getOwnerId() {

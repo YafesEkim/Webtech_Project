@@ -26,7 +26,7 @@ public class PersonEntity {
     private Gender gender;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
-    private List<PetEntity> pets = new ArrayList<>();
+    private List<RechnungEntity> rechnungen = new ArrayList<>();
 
     public PersonEntity(String firstName, String lastName, boolean member, Gender gender) {
         this.firstName = firstName;
@@ -73,11 +73,11 @@ public class PersonEntity {
         this.gender = gender;
     }
 
-    public List<PetEntity> getPets() {
-        return pets;
+    public List<RechnungEntity> getRechnungen() {
+        return rechnungen;
     }
 
-    public void setPets(List<PetEntity> pets) {
-        this.pets = pets;
+    public void setRechnungen(List<RechnungEntity> rechnungen) {
+        this.rechnungen = rechnungen;
     }
 }

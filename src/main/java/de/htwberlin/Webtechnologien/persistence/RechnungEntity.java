@@ -11,31 +11,31 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Entity(name = "pets")
-public class PetEntity {
+@Entity(name = "rechnungen")
+public class RechnungEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "firmenName", nullable = false)
+    private String firmenName;
 
-    @Column(name = "gender")
+    @Column(name = "rechnungsart")
     @Enumerated(value = EnumType.STRING)
-    private Gender gender;
+    private Rechnungsart rechnungsart;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private PersonEntity owner;
 
-    public PetEntity() {
+    public RechnungEntity() {
     }
 
-    public PetEntity(String name, Gender gender, PersonEntity owner) {
-        this.name = name;
-        this.gender = gender;
+    public RechnungEntity(String firmenName, Rechnungsart rechnugsart, PersonEntity owner) {
+        this.firmenName = firmenName;
+        this.rechnungsart = rechnungsart;
         this.owner = owner;
     }
 
@@ -43,20 +43,20 @@ public class PetEntity {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirmenName() {
+        return firmenName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirmenName(String name) {
+        this.firmenName = name;
     }
 
-    public Gender getGender() {
-        return gender;
+    public Rechnungsart getRechnungsart() {
+        return rechnungsart;
     }
 
-    public void setGender(Gender gender) {
-        this.gender = gender;
+    public void setRechnungsart(Rechnungsart rechnungsart) {
+        this.rechnungsart = rechnungsart;
     }
 
     public PersonEntity getOwner() {
