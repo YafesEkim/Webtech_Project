@@ -5,7 +5,6 @@ import de.htwberlin.Webtechnologien.persistence.PersonEntity;
 import de.htwberlin.Webtechnologien.persistence.PersonRepository;
 import de.htwberlin.Webtechnologien.web.api.Person;
 import de.htwberlin.Webtechnologien.web.api.PersonManipulationRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,28 +14,30 @@ import java.util.stream.Collectors;
 public class PersonService {
 
     private final PersonRepository personRepository;
+    private final PersonTransformer personTransformer;
 
-    public PersonService (PersonRepository personRepository){
+    public PersonService(PersonRepository personRepository, PersonTransformer personTransformer){
         this.personRepository = personRepository;
+        this.personTransformer = personTransformer;
     }
 
     public List<Person> findAll(){
         List<PersonEntity> persons = personRepository.findAll();
         return persons.stream()
-                .map(this::transformEntity)
+                .map(personTransformer::transformEntity)
                 .collect(Collectors.toList());
     }
 
     public Person findById(Long id){
         var personEntity = personRepository.findById(id);
-        return personEntity.isPresent()? transformEntity(personEntity.get()) : null;
+        return personEntity.map(personTransformer::transformEntity).orElse(null);
     }
 
     public Person create(PersonManipulationRequest request){
         var gender = Gender.valueOf(request.getGender());
         var personEntity = new PersonEntity(request.getFirstName(),request.getLastName(),request.isMember(), gender);
         personEntity = personRepository.save(personEntity);
-        return transformEntity(personEntity);
+        return personTransformer.transformEntity(personEntity);
     }
 
     public Person update (Long id, PersonManipulationRequest request){
@@ -53,7 +54,7 @@ public class PersonService {
 
         personEntity = personRepository.save(personEntity);
 
-        return transformEntity(personEntity);
+        return personTransformer.transformEntity(personEntity);
     }
 
     public boolean deleteById(Long id){
@@ -65,14 +66,5 @@ public class PersonService {
         return true;
     }
 
-    private Person transformEntity(PersonEntity personEntity){
-        var gender = personEntity.getGender() != null ? personEntity.getGender().name() : Gender.UNKNOWN.name();
-        return new Person(
-                personEntity.getId(),
-                personEntity.getFirstName(),
-                personEntity.getLastName(),
-                gender,
-                personEntity.getMember()
-        );
-    }
+
 }
