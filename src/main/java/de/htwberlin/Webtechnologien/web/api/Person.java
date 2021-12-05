@@ -5,12 +5,14 @@ public class Person {
     private long id;
     private String firstName;
     private String lastName;
+    private String gender;
     private boolean member;
 
-    public Person(long id, String firstName, String lastName, boolean member) {
+    public Person(long id, String firstName, String lastName, String gender, boolean member) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.gender = gender;
         this.member = member;
     }
 
@@ -46,5 +48,11 @@ public class Person {
         this.member = member;
     }
 
+    public String getGender() {
+        return gender;
+    }
 
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 }

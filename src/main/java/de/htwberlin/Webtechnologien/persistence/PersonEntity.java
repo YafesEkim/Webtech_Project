@@ -19,10 +19,15 @@ public class PersonEntity {
     @Column(name = "is_member")
     private boolean member;
 
-    public PersonEntity(String firstName, String lastName, boolean member) {
+    @Column(name = "gender")
+    @Enumerated(value = EnumType.STRING)
+    private Gender gender;
+
+    public PersonEntity(String firstName, String lastName, boolean member, Gender gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.member = member;
+        this.gender = gender;
     }
 
     protected PersonEntity(){}
@@ -53,5 +58,13 @@ public class PersonEntity {
 
     public void setMember(boolean member) {
         this.member = member;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }

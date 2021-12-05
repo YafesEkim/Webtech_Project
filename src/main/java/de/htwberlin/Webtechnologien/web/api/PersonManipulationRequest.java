@@ -4,11 +4,13 @@ public class PersonManipulationRequest {
 
     private String firstName;
     private String lastName;
+    private String gender;
     private boolean member;
 
-    public PersonManipulationRequest(String firstName, String lastName, boolean member) {
+    public PersonManipulationRequest(String firstName, String lastName, String gender, boolean member) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.gender = gender;
         this.member = member;
     }
 
@@ -36,4 +38,11 @@ public class PersonManipulationRequest {
         this.member = member;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 }

@@ -1,5 +1,6 @@
 package de.htwberlin.Webtechnologien.service;
 
+import de.htwberlin.Webtechnologien.persistence.Gender;
 import de.htwberlin.Webtechnologien.persistence.PersonEntity;
 import de.htwberlin.Webtechnologien.persistence.PersonRepository;
 import de.htwberlin.Webtechnologien.web.api.Person;
@@ -32,7 +33,8 @@ public class PersonService {
     }
 
     public Person create(PersonManipulationRequest request){
-        var personEntity = new PersonEntity(request.getFirstName(),request.getLastName(),request.isMember());
+        var gender = Gender.valueOf(request.getGender());
+        var personEntity = new PersonEntity(request.getFirstName(),request.getLastName(),request.isMember(), gender);
         personEntity = personRepository.save(personEntity);
         return transformEntity(personEntity);
     }
@@ -46,6 +48,7 @@ public class PersonService {
         var personEntity = personEntityOptional.get();
         personEntity.setFirstName(request.getFirstName());
         personEntity.setLastName(request.getLastName());
+        personEntity.setGender(Gender.valueOf(request.getGender()));
         personEntity.setMember(request.isMember());
 
         personEntity = personRepository.save(personEntity);
@@ -63,10 +66,12 @@ public class PersonService {
     }
 
     private Person transformEntity(PersonEntity personEntity){
-       return new Person(
+        var gender = personEntity.getGender() != null ? personEntity.getGender().name() : Gender.UNKNOWN.name();
+        return new Person(
                 personEntity.getId(),
                 personEntity.getFirstName(),
                 personEntity.getLastName(),
+                gender,
                 personEntity.getMember()
         );
     }
