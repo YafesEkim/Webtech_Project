@@ -1,6 +1,8 @@
 package de.htwberlin.Webtechnologien.persistence;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "persons")
 public class PersonEntity {
@@ -22,6 +24,9 @@ public class PersonEntity {
     @Column(name = "gender")
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
+
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
+    private List<PetEntity> pets = new ArrayList<>();
 
     public PersonEntity(String firstName, String lastName, boolean member, Gender gender) {
         this.firstName = firstName;
@@ -66,5 +71,13 @@ public class PersonEntity {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public List<PetEntity> getPets() {
+        return pets;
+    }
+
+    public void setPets(List<PetEntity> pets) {
+        this.pets = pets;
     }
 }
