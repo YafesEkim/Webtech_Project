@@ -14,6 +14,8 @@ public class PersonManipulationRequest {
         this.member = member;
     }
 
+    public PersonManipulationRequest() {} // Parameterloser Konstruktor für die Postreuqests
+
     public String getFirstName() {
         return firstName;
     }
