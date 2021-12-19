@@ -7,6 +7,7 @@ public class Person {
     private String lastName;
     private String gender;
     private boolean member;
+   // private Rechnung rechnung;
 
     public Person(long id, String firstName, String lastName, String gender, boolean member) {
         this.id = id;
