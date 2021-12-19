@@ -15,7 +15,8 @@ public class PersonTransformer {
                 personEntity.getFirstName(),
                 personEntity.getLastName(),
                 gender,
-                personEntity.getMember()
+                personEntity.getMember(),
+                personEntity.getRechnungen()
         );
     }
 }

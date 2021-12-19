@@ -1,5 +1,9 @@
 package de.htwberlin.Webtechnologien.web.api;
 
+import de.htwberlin.Webtechnologien.persistence.RechnungEntity;
+
+import java.util.List;
+
 public class Person {
 
     private long id;
@@ -8,13 +12,15 @@ public class Person {
     private String gender;
     private boolean member;
    // private Rechnung rechnung;
+    private List <RechnungEntity> rechnung;
 
-    public Person(long id, String firstName, String lastName, String gender, boolean member) {
+    public Person(long id, String firstName, String lastName, String gender, boolean member, List<RechnungEntity> rechnung) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.member = member;
+        this.rechnung = rechnung;
     }
 
     public long getId() {
@@ -55,5 +61,13 @@ public class Person {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public List<RechnungEntity> getRechnung() {
+        return rechnung;
+    }
+
+    public void setRechnung(List<RechnungEntity> rechnung) {
+        this.rechnung = rechnung;
     }
 }
