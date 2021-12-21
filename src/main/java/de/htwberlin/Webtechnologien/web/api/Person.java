@@ -12,15 +12,15 @@ public class Person {
     private String gender;
     private boolean member;
    // private Rechnung rechnung;
-    private List <Long> rechnungen;
+    private List<Long> rechnungIds;
 
-    public Person(long id, String firstName, String lastName, String gender, boolean member, List<Long> rechnungen) {
+    public Person(long id, String firstName, String lastName, String gender, boolean member, List<Long> rechnungIds) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.member = member;
-        this.rechnungen = rechnungen;
+        this.rechnungIds = rechnungIds;
     }
 
     public long getId() {
@@ -63,11 +63,11 @@ public class Person {
         this.gender = gender;
     }
 
-    public List<Long> getRechnungen() {
-        return rechnungen;
+    public List<Long> getRechnungIds() {
+        return rechnungIds;
     }
 
-    public void setRechnungen(List<Long> rechnungen) {
-        this.rechnungen = rechnungen;
+    public void setRechnungIds(List<Long> rechnungIds) {
+        this.rechnungIds = rechnungIds;
     }
 }

@@ -13,13 +13,13 @@ public class PersonTransformer {
 
     public Person transformEntity(PersonEntity personEntity){
         var gender = personEntity.getGender() != null ? personEntity.getGender().name() : Gender.UNKNOWN.name();
-        var rechnungen = personEntity.getRechnungen().stream().map(RechnungEntity::getId).collect(Collectors.toList());
+        var rechnungIds = personEntity.getRechnungen().stream().map(RechnungEntity::getId).collect(Collectors.toList());
         return new Person(
                 personEntity.getId(),
                 personEntity.getFirstName(),
                 personEntity.getLastName(),
                 gender,
                 personEntity.getMember(),
-                rechnungen);
+                rechnungIds);
     }
 }
