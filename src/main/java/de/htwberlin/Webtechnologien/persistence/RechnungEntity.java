@@ -33,7 +33,7 @@ public class RechnungEntity {
     public RechnungEntity() {
     }
 
-    public RechnungEntity(String firmenName, Rechnungsart rechnugsart, PersonEntity owner) {
+    public RechnungEntity(String firmenName, Rechnungsart rechnungsart, PersonEntity owner) {
         this.firmenName = firmenName;
         this.rechnungsart = rechnungsart;
         this.owner = owner;
