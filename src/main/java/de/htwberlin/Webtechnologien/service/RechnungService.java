@@ -22,8 +22,8 @@ public class RechnungService {
     }
 
     public List<Rechnung> findAll() {
-        List<RechnungEntity> pets = rechnungsRepository.findAll();
-        return pets.stream()
+        List<RechnungEntity> rechnungen = rechnungsRepository.findAll();
+        return rechnungen.stream()
                 .map(this::transformEntity)
                 .collect(Collectors.toList());
     }
@@ -31,9 +31,9 @@ public class RechnungService {
     public Rechnung create(RechnungManipulationRequest request) {
         var rechnungsart = Rechnungsart.valueOf(request.getRechnungsart());
         var owner = personRepository.findById(request.getOwnerId()).orElseThrow();
-        var petEntity = new RechnungEntity(request.getName(), rechnungsart, owner);
-        petEntity = rechnungsRepository.save(petEntity);
-        return transformEntity(petEntity);
+        var rechnungEntity = new RechnungEntity(request.getName(), rechnungsart, owner);
+        rechnungEntity = rechnungsRepository.save(rechnungEntity);
+        return transformEntity(rechnungEntity);
     }
 
     private Rechnung transformEntity(RechnungEntity rechnungEntity) {
