@@ -3,15 +3,25 @@ package de.htwberlin.Webtechnologien.web.api;
 public class Rechnung {
 
     private Long id;
-    private String firmenName;
+    private String rechnungsNummer;
     private String rechnungsart;
-    private Person person;
+    private String rechnungsDatum;
+    private Firma firma;
 
-    public Rechnung(Long id, String firmenName, String rechnungsart, Person person) {
+    public Rechnung(Long id, String rechnungsNummer, String rechnungsart, String rechnungsDatum, Firma firma) {
         this.id = id;
-        this.firmenName = firmenName;
+        this.rechnungsNummer = rechnungsNummer;
         this.rechnungsart = rechnungsart;
-        this.person = person;
+        this.rechnungsDatum = rechnungsDatum;
+        this.firma = firma;
+    }
+
+    public String getRechnungsDatum() {
+        return rechnungsDatum;
+    }
+
+    public void setRechnungsDatum(String rechnungsDatum) {
+        this.rechnungsDatum = rechnungsDatum;
     }
 
     public Long getId() {
@@ -22,12 +32,12 @@ public class Rechnung {
         this.id = id;
     }
 
-    public String getFirmenName() {
-        return firmenName;
+    public String getRechnungsNummer() {
+        return rechnungsNummer;
     }
 
-    public void setFirmenName(String firmenName) {
-        this.firmenName = firmenName;
+    public void setRechnungsNummer(String rechnungsNummer) {
+        this.rechnungsNummer = rechnungsNummer;
     }
 
     public String getRechnungsart() {
@@ -38,11 +48,11 @@ public class Rechnung {
         this.rechnungsart = rechnungsart;
     }
 
-    public Person getPerson() {
-        return person;
+    public Firma getFirma() {
+        return firma;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setFirma(Firma firma) {
+        this.firma = firma;
     }
 }

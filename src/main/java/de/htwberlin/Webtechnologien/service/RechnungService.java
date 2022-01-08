@@ -9,16 +9,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class RechnungService {
+public class  RechnungService {
 
     private final RechnungsRepository rechnungsRepository;
-    private final PersonRepository personRepository;
-    private final PersonTransformer personTransformer;
+    private final FirmaRepository firmaRepository;
+    private final FirmaTransformer firmaTransformer;
 
-    public RechnungService(RechnungsRepository rechnungsRepository, PersonRepository personRepository, PersonTransformer personTransformer) {
+    public RechnungService(RechnungsRepository rechnungsRepository, FirmaRepository firmaRepository, FirmaTransformer firmaTransformer) {
         this.rechnungsRepository = rechnungsRepository;
-        this.personRepository = personRepository;
-        this.personTransformer = personTransformer;
+        this.firmaRepository = firmaRepository;
+        this.firmaTransformer = firmaTransformer;
     }
 
     public List<Rechnung> findAll() {
@@ -30,8 +30,8 @@ public class RechnungService {
 
     public Rechnung create(RechnungManipulationRequest request) {
         var rechnungsart = Rechnungsart.valueOf(request.getRechnungsart());
-        var owner = personRepository.findById(request.getOwnerId()).orElseThrow();
-        var rechnungEntity = new RechnungEntity(request.getName(), rechnungsart, owner);
+        var owner = firmaRepository.findById(request.getOwnerId()).orElseThrow();
+        var rechnungEntity = new RechnungEntity(request.getRechnungsNummer(), rechnungsart, request.getRechnungsDatum(), owner);
         rechnungEntity = rechnungsRepository.save(rechnungEntity);
         return transformEntity(rechnungEntity);
     }
@@ -40,8 +40,9 @@ public class RechnungService {
         var rechnungsart = rechnungEntity.getRechnungsart() != null ? rechnungEntity.getRechnungsart().name() : Rechnungsart.EINNAHME.name();
         return new Rechnung(
                 rechnungEntity.getId(),
-                rechnungEntity.getFirmenName(),
+                rechnungEntity.getRechnungsNummer(),
                 rechnungsart,
-                personTransformer.transformEntity(rechnungEntity.getOwner()));
+                rechnungEntity.getRechnungsDatum(),
+                firmaTransformer.transformEntity(rechnungEntity.getOwner()));
     }
 }

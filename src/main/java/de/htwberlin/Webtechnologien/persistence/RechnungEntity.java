@@ -19,23 +19,28 @@ public class RechnungEntity {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "firmenName", nullable = false)
-    private String firmenName;
+    @Column(name = "rechnungsnummer", nullable = false)
+    private String rechnungsNummer;
 
     @Column(name = "rechnungsart")
     @Enumerated(value = EnumType.STRING)
     private Rechnungsart rechnungsart;
 
+    @Column(name = "rechnungsdatum", nullable = false)
+    private String rechnungsDatum;
+
+
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
-    private PersonEntity owner;
+    private FirmaEntity owner;
 
     public RechnungEntity() {
     }
 
-    public RechnungEntity(String firmenName, Rechnungsart rechnungsart, PersonEntity owner) {
-        this.firmenName = firmenName;
+    public RechnungEntity(String rechnungsNummer, Rechnungsart rechnungsart, String rechnungsDatum, FirmaEntity owner) {
+        this.rechnungsNummer = rechnungsNummer;
         this.rechnungsart = rechnungsart;
+        this.rechnungsDatum = rechnungsDatum;
         this.owner = owner;
     }
 
@@ -43,12 +48,12 @@ public class RechnungEntity {
         return id;
     }
 
-    public String getFirmenName() {
-        return firmenName;
+    public String getRechnungsNummer() {
+        return rechnungsNummer;
     }
 
-    public void setFirmenName(String name) {
-        this.firmenName = name;
+    public void setRechnungsNummer(String name) {
+        this.rechnungsNummer = name;
     }
 
     public Rechnungsart getRechnungsart() {
@@ -59,11 +64,19 @@ public class RechnungEntity {
         this.rechnungsart = rechnungsart;
     }
 
-    public PersonEntity getOwner() {
+    public String getRechnungsDatum() {
+        return rechnungsDatum;
+    }
+
+    public void setRechnungsDatum(String rechnungsDatum) {
+        this.rechnungsDatum = rechnungsDatum;
+    }
+
+    public FirmaEntity getOwner() {
         return owner;
     }
 
-    public void setOwner(PersonEntity owner) {
+    public void setOwner(FirmaEntity owner) {
         this.owner = owner;
     }
 }

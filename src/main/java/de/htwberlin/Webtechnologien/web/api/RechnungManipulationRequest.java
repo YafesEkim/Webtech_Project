@@ -2,22 +2,26 @@ package de.htwberlin.Webtechnologien.web.api;
 
 public class RechnungManipulationRequest {
 
-    private String name;
+    private String rechnungsNummer;
     private String rechnungsart;
+    private String rechnungsDatum;
     private Long ownerId;
 
-    public RechnungManipulationRequest(String name, String rechnungsart, Long ownerId) {
-        this.name = name;
+    public RechnungManipulationRequest(String rechnungsNummer, String rechnungsart, String rechnungsDatum, Long ownerId) {
+        this.rechnungsNummer = rechnungsNummer;
         this.rechnungsart = rechnungsart;
+        this.rechnungsDatum = rechnungsDatum;
         this.ownerId = ownerId;
     }
 
-    public String getName() {
-        return name;
+    public RechnungManipulationRequest(){}
+
+    public String getRechnungsNummer() {
+        return rechnungsNummer;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRechnungsNummer(String rechnungsNummer) {
+        this.rechnungsNummer = rechnungsNummer;
     }
 
     public String getRechnungsart() {
@@ -26,6 +30,14 @@ public class RechnungManipulationRequest {
 
     public void setRechnungsart(String rechnungsart) {
         this.rechnungsart = rechnungsart;
+    }
+
+    public String getRechnungsDatum() {
+        return rechnungsDatum;
+    }
+
+    public void setRechnungsDatum(String rechnungsDatum) {
+        this.rechnungsDatum = rechnungsDatum;
     }
 
     public Long getOwnerId() {
