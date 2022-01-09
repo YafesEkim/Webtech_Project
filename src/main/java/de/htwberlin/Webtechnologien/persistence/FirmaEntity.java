@@ -18,8 +18,6 @@ public class FirmaEntity {
     @Column(name = "firma_address", nullable = false)
     private String firmaAddress;
 
-    @Column(name = "is_member")
-    private boolean member;
 
     @Column(name = "ust_id", nullable = false)
     private String ust_id;
@@ -27,10 +25,9 @@ public class FirmaEntity {
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private List<RechnungEntity> rechnungen = new ArrayList<>();
 
-    public FirmaEntity(String firmaName, String firmaAddress, boolean member, String ust_id) {
+    public FirmaEntity(String firmaName, String firmaAddress, String ust_id) {
         this.firmaName = firmaName;
         this.firmaAddress = firmaAddress;
-        this.member = member;
         this.ust_id = ust_id;
     }
 
@@ -48,9 +45,6 @@ public class FirmaEntity {
         return firmaAddress;
     }
 
-    public boolean getMember() {
-        return member;
-    }
 
     public void setFirmaName(String firstName) {
         this.firmaName = firstName;
@@ -60,9 +54,6 @@ public class FirmaEntity {
         this.firmaAddress = lastName;
     }
 
-    public void setMember(boolean member) {
-        this.member = member;
-    }
 
     public String getUst_id() {
         return ust_id;

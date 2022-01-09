@@ -34,7 +34,7 @@ public class FirmaService {
 
     public Firma create(FirmaManipulationRequest request){
         //var gender = Gender.valueOf(request.getUst_id());
-        var firmaEntity = new FirmaEntity(request.getFirmaName(),request.getAddress(),request.isMember(), request.getUst_id());
+        var firmaEntity = new FirmaEntity(request.getFirmaName(),request.getAddress(), request.getUst_id());
         firmaEntity = firmaRepository.save(firmaEntity);
         return firmaTransformer.transformEntity(firmaEntity);
     }
@@ -49,7 +49,6 @@ public class FirmaService {
         firmaEntity.setFirmaName(request.getFirmaName());
         firmaEntity.setFirmaAddress(request.getAddress());
         firmaEntity.setUst_id(request.getUst_id());
-        firmaEntity.setMember(request.isMember());
 
         firmaEntity = firmaRepository.save(firmaEntity);
 

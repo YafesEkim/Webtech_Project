@@ -17,7 +17,6 @@ public class FirmaTransformer {
                 firmaEntity.getFirmaName(),
                 firmaEntity.getFirmaAddress(),
                 firmaEntity.getUst_id(),
-                firmaEntity.getMember(),
                 rechnungIds);
     }
 }

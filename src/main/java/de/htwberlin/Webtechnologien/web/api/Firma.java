@@ -8,16 +8,14 @@ public class Firma {
     private String firmaName;
     private String address;
     private String ust_id;
-    private boolean member;
 
     private List<Long> rechnungIds;
 
-    public Firma(long id, String firmaName, String address, String ust_id, boolean member, List<Long> rechnungIds) {
+    public Firma(long id, String firmaName, String address, String ust_id, List<Long> rechnungIds) {
         this.id = id;
         this.firmaName = firmaName;
         this.address = address;
         this.ust_id = ust_id;
-        this.member = member;
         this.rechnungIds = rechnungIds;
     }
 
@@ -43,14 +41,6 @@ public class Firma {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public boolean isMember() {
-        return member;
-    }
-
-    public void setMember(boolean member) {
-        this.member = member;
     }
 
     public String getUst_id() {
