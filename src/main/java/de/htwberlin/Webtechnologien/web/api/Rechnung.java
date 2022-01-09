@@ -6,13 +6,15 @@ public class Rechnung {
     private String rechnungsNummer;
     private String rechnungsart;
     private String rechnungsDatum;
+    private double betrag;
     private Firma firma;
 
-    public Rechnung(Long id, String rechnungsNummer, String rechnungsart, String rechnungsDatum, Firma firma) {
+    public Rechnung(Long id, String rechnungsNummer, String rechnungsart, String rechnungsDatum, double betrag, Firma firma) {
         this.id = id;
         this.rechnungsNummer = rechnungsNummer;
         this.rechnungsart = rechnungsart;
         this.rechnungsDatum = rechnungsDatum;
+        this.betrag = betrag;
         this.firma = firma;
     }
 
@@ -46,6 +48,14 @@ public class Rechnung {
 
     public void setRechnungsart(String rechnungsart) {
         this.rechnungsart = rechnungsart;
+    }
+
+    public double getBetrag() {
+        return betrag;
+    }
+
+    public void setBetrag(double betrag) {
+        this.betrag = betrag;
     }
 
     public Firma getFirma() {

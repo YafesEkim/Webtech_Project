@@ -29,6 +29,8 @@ public class RechnungEntity {
     @Column(name = "rechnungsdatum", nullable = false)
     private String rechnungsDatum;
 
+    @Column(name = "betrag", nullable = false)
+    private double betrag;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
@@ -37,10 +39,11 @@ public class RechnungEntity {
     public RechnungEntity() {
     }
 
-    public RechnungEntity(String rechnungsNummer, Rechnungsart rechnungsart, String rechnungsDatum, FirmaEntity owner) {
+    public RechnungEntity(String rechnungsNummer, Rechnungsart rechnungsart, String rechnungsDatum, double betrag, FirmaEntity owner) {
         this.rechnungsNummer = rechnungsNummer;
         this.rechnungsart = rechnungsart;
         this.rechnungsDatum = rechnungsDatum;
+        this.betrag = betrag;
         this.owner = owner;
     }
 
@@ -70,6 +73,14 @@ public class RechnungEntity {
 
     public void setRechnungsDatum(String rechnungsDatum) {
         this.rechnungsDatum = rechnungsDatum;
+    }
+
+    public double getBetrag() {
+        return betrag;
+    }
+
+    public void setBetrag(double betrag) {
+        this.betrag = betrag;
     }
 
     public FirmaEntity getOwner() {

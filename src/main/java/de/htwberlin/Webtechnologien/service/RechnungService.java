@@ -31,7 +31,7 @@ public class  RechnungService {
     public Rechnung create(RechnungManipulationRequest request) {
         var rechnungsart = Rechnungsart.valueOf(request.getRechnungsart());
         var owner = firmaRepository.findById(request.getOwnerId()).orElseThrow();
-        var rechnungEntity = new RechnungEntity(request.getRechnungsNummer(), rechnungsart, request.getRechnungsDatum(), owner);
+        var rechnungEntity = new RechnungEntity(request.getRechnungsNummer(), rechnungsart, request.getRechnungsDatum(), request.getBetrag(), owner);
         rechnungEntity = rechnungsRepository.save(rechnungEntity);
         return transformEntity(rechnungEntity);
     }
@@ -43,6 +43,7 @@ public class  RechnungService {
                 rechnungEntity.getRechnungsNummer(),
                 rechnungsart,
                 rechnungEntity.getRechnungsDatum(),
+                rechnungEntity.getBetrag(),
                 firmaTransformer.transformEntity(rechnungEntity.getOwner()));
     }
 }

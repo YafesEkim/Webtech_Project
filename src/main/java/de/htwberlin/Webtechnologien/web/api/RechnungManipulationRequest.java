@@ -5,12 +5,14 @@ public class RechnungManipulationRequest {
     private String rechnungsNummer;
     private String rechnungsart;
     private String rechnungsDatum;
+    private double betrag;
     private Long ownerId;
 
-    public RechnungManipulationRequest(String rechnungsNummer, String rechnungsart, String rechnungsDatum, Long ownerId) {
+    public RechnungManipulationRequest(String rechnungsNummer, String rechnungsart, String rechnungsDatum, double betrag, Long ownerId) {
         this.rechnungsNummer = rechnungsNummer;
         this.rechnungsart = rechnungsart;
         this.rechnungsDatum = rechnungsDatum;
+        this.betrag = betrag;
         this.ownerId = ownerId;
     }
 
@@ -38,6 +40,14 @@ public class RechnungManipulationRequest {
 
     public void setRechnungsDatum(String rechnungsDatum) {
         this.rechnungsDatum = rechnungsDatum;
+    }
+
+    public double getBetrag() {
+        return betrag;
+    }
+
+    public void setBetrag(double betrag) {
+        this.betrag = betrag;
     }
 
     public Long getOwnerId() {
